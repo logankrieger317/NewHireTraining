@@ -1,18 +1,46 @@
 import { ReactNode } from 'react';
+import { Box, Container, CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 import Navbar from './Navbar';
 
 interface LayoutProps {
   children: ReactNode;
 }
 
+// Create a theme instance
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#1976d2',
+    },
+    secondary: {
+      main: '#dc004e',
+    },
+    background: {
+      default: '#f5f5f5',
+    },
+  },
+});
+
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Navbar />
-      <main className="w-full max-w-[2000px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {children}
-      </main>
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+        <Navbar />
+        <Container 
+          component="main" 
+          maxWidth={false}
+          sx={{ 
+            flexGrow: 1, 
+            py: 4,
+            px: { xs: 2, sm: 4, md: 6 },
+            maxWidth: '2000px !important'
+          }}
+        >
+          {children}
+        </Container>
+      </Box>
+    </ThemeProvider>
   );
 };
 
