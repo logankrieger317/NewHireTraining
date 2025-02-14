@@ -5,28 +5,28 @@ import { Code as HtmlIcon, Palette as CssIcon, Javascript as JsIcon, Code as Rea
 const courses = [
   {
     title: 'HTML',
-    description: 'Learn the building blocks of web pages. Start here if you\'re new to web development.',
+    description: 'Learn the building blocks of web pages.',
     path: '/html',
     icon: HtmlIcon,
     color: '#2563eb'
   },
   {
     title: 'CSS',
-    description: 'Style your web pages and make them beautiful. Continues from HTML basics.',
+    description: 'Style your web pages with modern CSS.',
     path: '/css',
     icon: CssIcon,
     color: '#7c3aed'
   },
   {
     title: 'JavaScript',
-    description: 'Add interactivity to your websites. Learn programming basics with JavaScript.',
+    description: 'Add interactivity to your websites.',
     path: '/javascript',
     icon: JsIcon,
     color: '#ca8a04'
   },
   {
     title: 'React',
-    description: 'Build modern web applications with React. Requires JavaScript knowledge.',
+    description: 'Build modern web applications with React.',
     path: '/react',
     icon: ReactIcon,
     color: '#059669'
