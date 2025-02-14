@@ -1,10 +1,8 @@
 import { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import {
   AppBar,
   Box,
-  Button,
-  Container,
   Drawer,
   IconButton,
   List,
@@ -12,9 +10,11 @@ import {
   ListItemButton,
   ListItemText,
   Toolbar,
+  Button,
   Typography,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import HomeIcon from '@mui/icons-material/Home';
 
 const navItems = [
   { text: 'HTML', path: '/html' },
@@ -24,6 +24,7 @@ const navItems = [
 ];
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
@@ -32,10 +33,16 @@ const Navbar = () => {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
-        WebDev Training
-      </Typography>
       <List>
+        <ListItem disablePadding>
+          <ListItemButton 
+            component={RouterLink} 
+            to="/"
+            sx={{ textAlign: 'center' }}
+          >
+            <ListItemText primary="Home" />
+          </ListItemButton>
+        </ListItem>
         {navItems.map((item) => (
           <ListItem key={item.text} disablePadding>
             <ListItemButton
@@ -53,68 +60,92 @@ const Navbar = () => {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <AppBar position="static" sx={{ backgroundColor: '#1e293b' }}>
-        <Container maxWidth={false} sx={{ maxWidth: '2000px !important' }}>
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              edge="start"
-              onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { sm: 'none' } }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography
-              variant="h6"
-              component={RouterLink}
-              to="/"
-              sx={{
-                flexGrow: 1,
-                textDecoration: 'none',
-                color: 'inherit',
-                fontWeight: 700,
-              }}
-            >
-              WebDev Training
-            </Typography>
-            <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-              {navItems.map((item) => (
-                <Button
-                  key={item.text}
-                  component={RouterLink}
-                  to={item.path}
-                  sx={{ 
-                    color: 'white',
-                    mx: 1,
-                    '&:hover': {
-                      color: 'primary.light',
-                    },
-                  }}
-                >
-                  {item.text}
-                </Button>
-              ))}
-            </Box>
-          </Toolbar>
-        </Container>
+      <AppBar 
+        component="nav" 
+        sx={{ 
+          bgcolor: 'background.paper',
+          borderBottom: '1px solid',
+          borderColor: 'divider'
+        }}
+      >
+        <Toolbar>
+          <IconButton
+            color="primary"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            sx={{ mr: 2, display: { sm: 'none' } }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Button
+            startIcon={<HomeIcon />}
+            onClick={() => navigate('/')}
+            sx={{
+              mr: 2,
+              color: 'primary.main',
+              display: { xs: 'none', sm: 'flex' },
+              '&:hover': {
+                bgcolor: 'primary.main',
+                color: 'white'
+              }
+            }}
+          >
+            Home
+          </Button>
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{
+              flexGrow: 1,
+              color: 'text.primary',
+              fontWeight: 600,
+              textDecoration: 'none'
+            }}
+          >
+            New Hire Training
+          </Typography>
+          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+            {navItems.map((item) => (
+              <Button
+                key={item.text}
+                component={RouterLink}
+                to={item.path}
+                sx={{ 
+                  color: 'text.primary',
+                  ml: 2,
+                  '&:hover': {
+                    bgcolor: 'primary.main',
+                    color: 'white'
+                  }
+                }}
+              >
+                {item.text}
+              </Button>
+            ))}
+          </Box>
+        </Toolbar>
       </AppBar>
-      <Box component="nav">
+      <nav>
         <Drawer
           variant="temporary"
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+            keepMounted: true, // Better mobile performance
           }}
           sx={{
             display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 240 },
+            '& .MuiDrawer-paper': { 
+              boxSizing: 'border-box', 
+              width: 240,
+              bgcolor: 'background.paper'
+            },
           }}
         >
           {drawer}
         </Drawer>
-      </Box>
+      </nav>
     </Box>
   );
 };
