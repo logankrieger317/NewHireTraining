@@ -1,41 +1,151 @@
-import Layout from '../components/layout/Layout';
+import { Box, Typography, Grid, Paper, Button, useTheme } from '@mui/material';
+import { Link } from 'react-router-dom';
+import { Code as HtmlIcon, Palette as CssIcon, Javascript as JsIcon, Code as ReactIcon } from '@mui/icons-material';
+
+const courses = [
+  {
+    title: 'HTML',
+    description: 'Learn the building blocks of web pages. Start here if you\'re new to web development.',
+    path: '/html',
+    icon: HtmlIcon,
+    color: '#2563eb'
+  },
+  {
+    title: 'CSS',
+    description: 'Style your web pages and make them beautiful. Continues from HTML basics.',
+    path: '/css',
+    icon: CssIcon,
+    color: '#7c3aed'
+  },
+  {
+    title: 'JavaScript',
+    description: 'Add interactivity to your websites. Learn programming basics with JavaScript.',
+    path: '/javascript',
+    icon: JsIcon,
+    color: '#ca8a04'
+  },
+  {
+    title: 'React',
+    description: 'Build modern web applications with React. Requires JavaScript knowledge.',
+    path: '/react',
+    icon: ReactIcon,
+    color: '#059669'
+  }
+];
 
 const HomePage = () => {
+  const theme = useTheme();
+
   return (
-    <Layout>
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold mb-6">Welcome to Web Development Training</h1>
-        <p className="text-lg mb-8">
+    <Box
+      sx={{
+        maxWidth: 'lg',
+        mx: 'auto',
+        px: { xs: 2, sm: 4 },
+        py: { xs: 4, md: 6 }
+      }}
+    >
+      <Box sx={{ textAlign: 'center', mb: { xs: 6, md: 8 } }}>
+        <Typography
+          variant="h2"
+          sx={{
+            mb: 2,
+            fontWeight: 700,
+            background: 'linear-gradient(45deg, #2563eb 30%, #7c3aed 90%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent'
+          }}
+        >
+          Welcome to Web Development Training
+        </Typography>
+        <Typography
+          variant="h5"
+          color="text.secondary"
+          sx={{
+            maxWidth: 'md',
+            mx: 'auto',
+            lineHeight: 1.6
+          }}
+        >
           Start your journey to becoming a web developer! Choose your learning path:
-        </p>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-            <h2 className="text-2xl font-semibold mb-3 text-blue-600">HTML</h2>
-            <p className="mb-4">Learn the building blocks of web pages. Start here if you're new to web development.</p>
-            <a href="/html" className="text-blue-500 hover:underline">Start HTML →</a>
-          </div>
-          
-          <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-            <h2 className="text-2xl font-semibold mb-3 text-purple-600">CSS</h2>
-            <p className="mb-4">Style your web pages and make them beautiful. Continues from HTML basics.</p>
-            <a href="/css" className="text-purple-500 hover:underline">Start CSS →</a>
-          </div>
-          
-          <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-            <h2 className="text-2xl font-semibold mb-3 text-yellow-600">JavaScript</h2>
-            <p className="mb-4">Add interactivity to your websites. Learn programming basics with JavaScript.</p>
-            <a href="/javascript" className="text-yellow-600 hover:underline">Start JavaScript →</a>
-          </div>
-          
-          <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-            <h2 className="text-2xl font-semibold mb-3 text-green-600">React</h2>
-            <p className="mb-4">Build modern web applications with React. Requires JavaScript knowledge.</p>
-            <a href="/react" className="text-green-500 hover:underline">Start React →</a>
-          </div>
-        </div>
-      </div>
-    </Layout>
+        </Typography>
+      </Box>
+
+      <Grid container spacing={3}>
+        {courses.map((course) => (
+          <Grid item xs={12} md={6} key={course.title}>
+            <Paper
+              elevation={0}
+              sx={{
+                p: 4,
+                height: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                borderRadius: 3,
+                border: '1px solid',
+                borderColor: 'divider',
+                transition: 'all 0.3s ease-in-out',
+                '&:hover': {
+                  transform: 'translateY(-4px)',
+                  boxShadow: theme.shadows[4],
+                  borderColor: 'transparent'
+                }
+              }}
+            >
+              <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                <course.icon
+                  sx={{
+                    fontSize: 40,
+                    color: course.color,
+                    mr: 2
+                  }}
+                />
+                <Typography
+                  variant="h4"
+                  sx={{
+                    fontWeight: 600,
+                    color: course.color
+                  }}
+                >
+                  {course.title}
+                </Typography>
+              </Box>
+
+              <Typography
+                variant="body1"
+                sx={{
+                  mb: 3,
+                  color: 'text.secondary',
+                  flexGrow: 1,
+                  fontSize: '1.1rem',
+                  lineHeight: 1.6
+                }}
+              >
+                {course.description}
+              </Typography>
+
+              <Button
+                component={Link}
+                to={course.path}
+                variant="outlined"
+                size="large"
+                sx={{
+                  alignSelf: 'flex-start',
+                  borderColor: course.color,
+                  color: course.color,
+                  '&:hover': {
+                    borderColor: course.color,
+                    backgroundColor: `${course.color}10`
+                  }
+                }}
+              >
+                Start {course.title} →
+              </Button>
+            </Paper>
+          </Grid>
+        ))}
+      </Grid>
+    </Box>
   );
 };
 

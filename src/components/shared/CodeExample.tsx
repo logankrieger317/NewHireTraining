@@ -3,6 +3,8 @@ import Editor from '@monaco-editor/react';
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
 import html from 'react-syntax-highlighter/dist/esm/languages/hljs/xml';
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { Box, Paper, Typography, Grid, IconButton, Tooltip, Fade } from '@mui/material';
+import { Preview as PreviewIcon, Code as CodeIcon } from '@mui/icons-material';
 
 SyntaxHighlighter.registerLanguage('html', html);
 
@@ -31,54 +33,116 @@ const CodeExample = ({
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-4 my-4">
-      <h3 className="text-xl font-semibold mb-2">{title}</h3>
-      {description && <p className="mb-4 text-gray-600">{description}</p>}
-      
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <div className="h-[300px] border rounded">
-          {isEditable ? (
-            <Editor
-              height="100%"
-              defaultLanguage={language}
-              defaultValue={code}
-              onChange={handleCodeChange}
-              theme="vs-light"
-              options={{
-                minimap: { enabled: false },
-                fontSize: 14,
-              }}
-            />
-          ) : (
-            <SyntaxHighlighter 
-              language={language} 
-              style={docco}
-              className="h-full overflow-auto"
-            >
-              {code}
-            </SyntaxHighlighter>
+    <Paper 
+      elevation={0}
+      sx={{ 
+        p: 4,
+        my: 4,
+        border: '1px solid',
+        borderColor: 'divider',
+        borderRadius: 3,
+        background: 'linear-gradient(to bottom, #ffffff, #f8fafc)'
+      }}
+    >
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+        <Box>
+          <Typography variant="h5" sx={{ fontWeight: 600, color: 'text.primary', mb: 1 }}>
+            {title}
+          </Typography>
+          {description && (
+            <Typography variant="body1" sx={{ color: 'text.secondary' }}>
+              {description}
+            </Typography>
           )}
-        </div>
-        
-        {showPreview && language === 'html' && (
-          <div className="border rounded p-4 h-[300px] overflow-auto">
-            <div 
-              dangerouslySetInnerHTML={{ __html: code }} 
-              className="preview-container"
-            />
-          </div>
-        )}
-      </div>
-      
-      {language === 'html' && (
-        <button
-          onClick={() => setShowPreview(!showPreview)}
-          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
+        </Box>
+        <Tooltip 
+          title={showPreview ? "Show Code Only" : "Show Preview"} 
+          TransitionComponent={Fade}
+          placement="left"
         >
-          {showPreview ? 'Hide Preview' : 'Show Preview'}
-        </button>
-      )}
-    </div>
+          <IconButton 
+            onClick={() => setShowPreview(!showPreview)}
+            color="primary"
+            sx={{
+              bgcolor: 'primary.main',
+              color: 'white',
+              '&:hover': {
+                bgcolor: 'primary.dark',
+              },
+              width: 40,
+              height: 40,
+            }}
+          >
+            {showPreview ? <CodeIcon /> : <PreviewIcon />}
+          </IconButton>
+        </Tooltip>
+      </Box>
+
+      <Grid container spacing={3}>
+        <Grid item xs={12} lg={showPreview ? 6 : 12}>
+          <Paper
+            elevation={0}
+            sx={{
+              height: 300,
+              border: '1px solid',
+              borderColor: 'divider',
+              borderRadius: 2,
+              overflow: 'hidden',
+              '& .monaco-editor': {
+                paddingTop: 1,
+              },
+            }}
+          >
+            {isEditable ? (
+              <Editor
+                height="100%"
+                defaultLanguage={language}
+                defaultValue={code}
+                onChange={handleCodeChange}
+                theme="vs-light"
+                options={{
+                  minimap: { enabled: false },
+                  fontSize: 14,
+                  padding: { top: 8 },
+                  scrollBeyondLastLine: false,
+                }}
+              />
+            ) : (
+              <SyntaxHighlighter 
+                language={language} 
+                style={docco}
+                customStyle={{
+                  margin: 0,
+                  padding: '1rem',
+                  height: '100%',
+                }}
+              >
+                {code}
+              </SyntaxHighlighter>
+            )}
+          </Paper>
+        </Grid>
+        
+        {showPreview && (
+          <Grid item xs={12} lg={6}>
+            <Paper
+              elevation={0}
+              sx={{
+                height: 300,
+                border: '1px solid',
+                borderColor: 'divider',
+                borderRadius: 2,
+                p: 3,
+                overflow: 'auto',
+                bgcolor: 'background.paper',
+              }}
+            >
+              <div dangerouslySetInnerHTML={{ __html: code }} />
+            </Paper>
+          </Grid>
+        )}
+      </Grid>
+    </Paper>
   );
 };
 

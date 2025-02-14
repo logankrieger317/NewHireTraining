@@ -4,7 +4,7 @@ import CodeExample from '../../components/shared/CodeExample';
 const lessons = [
   {
     id: 1,
-    title: 'HTML Basics',
+    title: 'JavaScript Basics',
     content: (
       <Box>
         <Paper 
@@ -22,13 +22,13 @@ const lessons = [
             variant="h3" 
             sx={{ 
               mb: 2,
-              background: 'linear-gradient(to right, #2563eb, #7c3aed)',
+              background: 'linear-gradient(to right, #ca8a04, #eab308)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               fontWeight: 700
             }}
           >
-            Introduction to HTML
+            Introduction to JavaScript
           </Typography>
           
           <Typography 
@@ -40,25 +40,38 @@ const lessons = [
               lineHeight: 1.7
             }}
           >
-            HTML (HyperText Markup Language) is the standard markup language for creating web pages.
-            It describes the structure of a web page using various elements and tags.
+            JavaScript is a programming language that enables interactive web pages.
+            It's an essential part of web development, allowing you to create dynamic content and handle user interactions.
           </Typography>
         </Paper>
         
         <CodeExample
-          title="Basic HTML Structure"
-          description="Every HTML document follows this basic structure:"
-          language="html"
-          initialCode={`<!DOCTYPE html>
-<html>
-  <head>
-    <title>My First Web Page</title>
-  </head>
-  <body>
-    <h1>Welcome to my website!</h1>
-    <p>This is my first web page.</p>
-  </body>
-</html>`}
+          title="Basic JavaScript Syntax"
+          description="Here are some fundamental JavaScript concepts:"
+          language="javascript"
+          initialCode={`// Variables and Data Types
+let name = 'John';  // String
+const age = 25;     // Number
+let isStudent = true;  // Boolean
+
+// Functions
+function greet(name) {
+  return 'Hello, ' + name + '!';
+}
+
+// Arrays
+let colors = ['red', 'green', 'blue'];
+colors.push('yellow');  // Add to array
+
+// Objects
+let person = {
+  name: 'John',
+  age: 25,
+  isStudent: true,
+  greet: function() {
+    return 'Hello, I am ' + this.name;
+  }
+};`}
         />
         
         <Paper 
@@ -80,26 +93,18 @@ const lessons = [
               fontWeight: 600
             }}
           >
-            Common HTML Elements
+            Core JavaScript Concepts
           </Typography>
           
           <List sx={{ width: '100%' }}>
             <ListItem sx={{ py: 2 }}>
               <ListItemText 
                 primary={
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                    <Typography component="span" sx={{ fontFamily: 'monospace', color: 'primary.main' }}>
-                      &lt;h1&gt;
-                    </Typography>
-                    <Typography component="span" sx={{ color: 'text.secondary', mx: 1 }}>
-                      to
-                    </Typography>
-                    <Typography component="span" sx={{ fontFamily: 'monospace', color: 'primary.main' }}>
-                      &lt;h6&gt;
-                    </Typography>
-                  </Box>
+                  <Typography component="span" sx={{ fontFamily: 'monospace', color: 'primary.main' }}>
+                    Variables & Data Types
+                  </Typography>
                 }
-                secondary="Headings - Used to define different levels of titles and subtitles"
+                secondary="Store and manipulate different types of data"
                 secondaryTypographyProps={{ sx: { mt: 0.5 } }}
               />
             </ListItem>
@@ -108,10 +113,10 @@ const lessons = [
               <ListItemText 
                 primary={
                   <Typography component="span" sx={{ fontFamily: 'monospace', color: 'primary.main' }}>
-                    &lt;p&gt;
+                    Functions
                   </Typography>
                 }
-                secondary="Paragraphs - Used to define blocks of text"
+                secondary="Reusable blocks of code that perform specific tasks"
                 secondaryTypographyProps={{ sx: { mt: 0.5 } }}
               />
             </ListItem>
@@ -120,10 +125,10 @@ const lessons = [
               <ListItemText 
                 primary={
                   <Typography component="span" sx={{ fontFamily: 'monospace', color: 'primary.main' }}>
-                    &lt;a&gt;
+                    Arrays & Objects
                   </Typography>
                 }
-                secondary="Links - Used to create hyperlinks to other pages or resources"
+                secondary="Complex data structures for organizing information"
                 secondaryTypographyProps={{ sx: { mt: 0.5 } }}
               />
             </ListItem>
@@ -132,10 +137,10 @@ const lessons = [
               <ListItemText 
                 primary={
                   <Typography component="span" sx={{ fontFamily: 'monospace', color: 'primary.main' }}>
-                    &lt;img&gt;
+                    Control Flow
                   </Typography>
                 }
-                secondary="Images - Used to embed images in your web page"
+                secondary="if statements, loops, and other control structures"
                 secondaryTypographyProps={{ sx: { mt: 0.5 } }}
               />
             </ListItem>
@@ -143,19 +148,11 @@ const lessons = [
             <ListItem sx={{ py: 2 }}>
               <ListItemText 
                 primary={
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                    <Typography component="span" sx={{ fontFamily: 'monospace', color: 'primary.main' }}>
-                      &lt;ul&gt;
-                    </Typography>
-                    <Typography component="span" sx={{ fontFamily: 'monospace', color: 'primary.main' }}>
-                      &lt;ol&gt;
-                    </Typography>
-                    <Typography component="span" sx={{ fontFamily: 'monospace', color: 'primary.main' }}>
-                      &lt;li&gt;
-                    </Typography>
-                  </Box>
+                  <Typography component="span" sx={{ fontFamily: 'monospace', color: 'primary.main' }}>
+                    DOM Manipulation
+                  </Typography>
                 }
-                secondary="Lists - Used to create unordered (bullet) and ordered (numbered) lists"
+                secondary="Interact with HTML elements on the page"
                 secondaryTypographyProps={{ sx: { mt: 0.5 } }}
               />
             </ListItem>
@@ -164,21 +161,27 @@ const lessons = [
         
         <CodeExample
           title="Try it yourself!"
-          description="Edit this code to create your own HTML content:"
-          language="html"
-          initialCode={`<h1>My Page</h1>
-<p>Write your content here!</p>
-<ul>
-  <li>List item 1</li>
-  <li>List item 2</li>
-</ul>`}
+          description="Edit this code to experiment with JavaScript:"
+          language="javascript"
+          initialCode={`// Create a function that calculates the sum of numbers
+function calculateSum(numbers) {
+  let sum = 0;
+  
+  // Add your code here
+  
+  return sum;
+}
+
+// Test your function
+const numbers = [1, 2, 3, 4, 5];
+console.log(calculateSum(numbers));  // Should output: 15`}
         />
       </Box>
     ),
   },
 ];
 
-const HTMLPage = () => {
+const JavaScriptPage = () => {
   return (
     <Box 
       sx={{ 
@@ -196,4 +199,4 @@ const HTMLPage = () => {
   );
 };
 
-export default HTMLPage;
+export default JavaScriptPage;

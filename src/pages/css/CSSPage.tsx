@@ -4,7 +4,7 @@ import CodeExample from '../../components/shared/CodeExample';
 const lessons = [
   {
     id: 1,
-    title: 'HTML Basics',
+    title: 'CSS Basics',
     content: (
       <Box>
         <Paper 
@@ -22,13 +22,13 @@ const lessons = [
             variant="h3" 
             sx={{ 
               mb: 2,
-              background: 'linear-gradient(to right, #2563eb, #7c3aed)',
+              background: 'linear-gradient(to right, #7c3aed, #a855f7)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               fontWeight: 700
             }}
           >
-            Introduction to HTML
+            Introduction to CSS
           </Typography>
           
           <Typography 
@@ -40,25 +40,37 @@ const lessons = [
               lineHeight: 1.7
             }}
           >
-            HTML (HyperText Markup Language) is the standard markup language for creating web pages.
-            It describes the structure of a web page using various elements and tags.
+            CSS (Cascading Style Sheets) is the language used to style web pages.
+            It describes how HTML elements should be displayed on screen, paper, or other media.
           </Typography>
         </Paper>
         
         <CodeExample
-          title="Basic HTML Structure"
-          description="Every HTML document follows this basic structure:"
-          language="html"
-          initialCode={`<!DOCTYPE html>
-<html>
-  <head>
-    <title>My First Web Page</title>
-  </head>
-  <body>
-    <h1>Welcome to my website!</h1>
-    <p>This is my first web page.</p>
-  </body>
-</html>`}
+          title="Basic CSS Syntax"
+          description="CSS uses a selector and declaration block format:"
+          language="css"
+          initialCode={`/* Styling a specific element by its tag name */
+h1 {
+  color: #333333;
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+/* Styling elements by class */
+.button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+}
+
+/* Styling elements by ID */
+#header {
+  background-color: #f8f8f8;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}`}
         />
         
         <Paper 
@@ -80,26 +92,18 @@ const lessons = [
               fontWeight: 600
             }}
           >
-            Common HTML Elements
+            Common CSS Properties
           </Typography>
           
           <List sx={{ width: '100%' }}>
             <ListItem sx={{ py: 2 }}>
               <ListItemText 
                 primary={
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                    <Typography component="span" sx={{ fontFamily: 'monospace', color: 'primary.main' }}>
-                      &lt;h1&gt;
-                    </Typography>
-                    <Typography component="span" sx={{ color: 'text.secondary', mx: 1 }}>
-                      to
-                    </Typography>
-                    <Typography component="span" sx={{ fontFamily: 'monospace', color: 'primary.main' }}>
-                      &lt;h6&gt;
-                    </Typography>
-                  </Box>
+                  <Typography component="span" sx={{ fontFamily: 'monospace', color: 'primary.main' }}>
+                    color, background-color
+                  </Typography>
                 }
-                secondary="Headings - Used to define different levels of titles and subtitles"
+                secondary="Control text and background colors"
                 secondaryTypographyProps={{ sx: { mt: 0.5 } }}
               />
             </ListItem>
@@ -108,10 +112,10 @@ const lessons = [
               <ListItemText 
                 primary={
                   <Typography component="span" sx={{ fontFamily: 'monospace', color: 'primary.main' }}>
-                    &lt;p&gt;
+                    margin, padding
                   </Typography>
                 }
-                secondary="Paragraphs - Used to define blocks of text"
+                secondary="Control spacing around and within elements"
                 secondaryTypographyProps={{ sx: { mt: 0.5 } }}
               />
             </ListItem>
@@ -120,10 +124,10 @@ const lessons = [
               <ListItemText 
                 primary={
                   <Typography component="span" sx={{ fontFamily: 'monospace', color: 'primary.main' }}>
-                    &lt;a&gt;
+                    width, height
                   </Typography>
                 }
-                secondary="Links - Used to create hyperlinks to other pages or resources"
+                secondary="Set dimensions of elements"
                 secondaryTypographyProps={{ sx: { mt: 0.5 } }}
               />
             </ListItem>
@@ -132,10 +136,10 @@ const lessons = [
               <ListItemText 
                 primary={
                   <Typography component="span" sx={{ fontFamily: 'monospace', color: 'primary.main' }}>
-                    &lt;img&gt;
+                    font-size, font-weight
                   </Typography>
                 }
-                secondary="Images - Used to embed images in your web page"
+                secondary="Control text appearance and weight"
                 secondaryTypographyProps={{ sx: { mt: 0.5 } }}
               />
             </ListItem>
@@ -143,19 +147,11 @@ const lessons = [
             <ListItem sx={{ py: 2 }}>
               <ListItemText 
                 primary={
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                    <Typography component="span" sx={{ fontFamily: 'monospace', color: 'primary.main' }}>
-                      &lt;ul&gt;
-                    </Typography>
-                    <Typography component="span" sx={{ fontFamily: 'monospace', color: 'primary.main' }}>
-                      &lt;ol&gt;
-                    </Typography>
-                    <Typography component="span" sx={{ fontFamily: 'monospace', color: 'primary.main' }}>
-                      &lt;li&gt;
-                    </Typography>
-                  </Box>
+                  <Typography component="span" sx={{ fontFamily: 'monospace', color: 'primary.main' }}>
+                    display, position
+                  </Typography>
                 }
-                secondary="Lists - Used to create unordered (bullet) and ordered (numbered) lists"
+                secondary="Control layout and positioning of elements"
                 secondaryTypographyProps={{ sx: { mt: 0.5 } }}
               />
             </ListItem>
@@ -164,21 +160,30 @@ const lessons = [
         
         <CodeExample
           title="Try it yourself!"
-          description="Edit this code to create your own HTML content:"
-          language="html"
-          initialCode={`<h1>My Page</h1>
-<p>Write your content here!</p>
-<ul>
-  <li>List item 1</li>
-  <li>List item 2</li>
-</ul>`}
+          description="Edit this CSS to style your HTML elements:"
+          language="css"
+          initialCode={`.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.title {
+  color: #333;
+  font-size: 32px;
+  text-align: center;
+}
+
+.button {
+  /* Add your styles here */
+}`}
         />
       </Box>
     ),
   },
 ];
 
-const HTMLPage = () => {
+const CSSPage = () => {
   return (
     <Box 
       sx={{ 
@@ -196,4 +201,4 @@ const HTMLPage = () => {
   );
 };
 
-export default HTMLPage;
+export default CSSPage;
